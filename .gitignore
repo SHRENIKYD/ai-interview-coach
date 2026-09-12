@@ -20,3 +20,7 @@ Thumbs.db
 *.swp
 .idea/
 .vscode/
+
+# Seeded design-canvas output (2MB+, regenerated from design/*.dc.html)
+design/*.html
+!design/*.dc.html
