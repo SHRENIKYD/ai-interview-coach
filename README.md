@@ -1,5 +1,11 @@
 # AI Interview Coach
 
+**Live:** <https://ai-interview-coach-ochre-omega.vercel.app>
+(API: <https://ai-interview-coach-w2y5.onrender.com/api/health>)
+
+> The API runs on Render's free tier, which sleeps after ~15 minutes idle. The first
+> request after a quiet spell can take 50 seconds or more while it wakes up.
+
 Type a technical topic, pick Easy / Medium / Hard, and an AI interviewer interviews you
 one question at a time. It follows up when your answer is half-right, moves on when it's
 wrong, and never gives you the answer. When it has seen enough it ends the interview on

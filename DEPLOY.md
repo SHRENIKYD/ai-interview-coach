@@ -1,5 +1,14 @@
 # Deploying
 
+Currently deployed at:
+
+| Part     | URL                                                  |
+| -------- | ---------------------------------------------------- |
+| Frontend | <https://ai-interview-coach-ochre-omega.vercel.app>   |
+| Backend  | <https://ai-interview-coach-w2y5.onrender.com>        |
+
+The rest of this file is the walkthrough for deploying it yourself.
+
 Backend on **Render**, frontend on **Vercel**. Both have free tiers that fit this app.
 
 Deploy the backend first — the frontend needs its URL.
@@ -10,6 +19,19 @@ Deploy the backend first — the frontend needs its URL.
 > comfortable paying for whoever finds it.
 
 ---
+
+## Gotchas hit during the real deploy
+
+- **Set Root Directory to `backend` before the first build.** Configuring the service
+  through Render's form rather than the blueprint skips `render.yaml` entirely, so the
+  build runs from the repo root and `pip install -r requirements.txt` fails with
+  "No such file or directory".
+- **Replace Render's default Start Command.** It pre-fills `gunicorn your_application.wsgi`,
+  which is WSGI; this is an ASGI app and needs the uvicorn command below.
+- **A build can fail on `ConnectionResetError` mid-download.** That is a transient network
+  fault on the builder, not a config problem. Clear build cache and redeploy.
+- **Vercel needs Root Directory `frontend`**, and `NEXT_PUBLIC_API_URL` must be set
+  *before* the build, since Next.js inlines `NEXT_PUBLIC_*` at build time.
 
 ## 1. Backend → Render
 
