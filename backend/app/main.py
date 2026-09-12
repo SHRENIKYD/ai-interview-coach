@@ -40,12 +40,20 @@ async def lifespan(app: FastAPI):
     logger.info("  AI Interview Coach - backend ready")
     logger.info("  Docs:   /docs        (on whichever host:port uvicorn reports below)")
     logger.info("  Health: /api/health")
-    logger.info("  Model:  %s", settings.groq_model)
+    logger.info("  Model:  %s  (via %s)", settings.model, settings.provider.label)
     logger.info("  CORS:   %s", ", ".join(settings.allowed_origins))
+    if not settings.provider_was_recognised:
+        logger.warning(
+            "  AI_PROVIDER not recognised - falling back to %s", settings.provider.label
+        )
     if settings.has_api_key:
-        logger.info("  Groq key: found")
+        logger.info("  API key: found (%s)", settings.provider.key_env)
     else:
-        logger.warning("  Groq key: MISSING - copy .env.example to .env and add GROQ_API_KEY")
+        logger.warning(
+            "  API key: MISSING - add %s to backend/.env (get one at %s)",
+            settings.provider.key_env,
+            settings.provider.console_url,
+        )
     logger.info("=" * 62)
     yield
     logger.info("AI Interview Coach backend shutting down.")
@@ -119,8 +127,9 @@ async def health() -> HealthResponse:
     settings = get_settings()
     return HealthResponse(
         status="ok",
-        model=settings.groq_model,
-        groq_key_configured=settings.has_api_key,
+        provider=settings.provider.label,
+        model=settings.model,
+        api_key_configured=settings.has_api_key,
     )
 
 

@@ -85,5 +85,6 @@ class ReportResponse(BaseModel):
 
 class HealthResponse(BaseModel):
     status: Literal["ok"]
+    provider: str
     model: str
-    groq_key_configured: bool
+    api_key_configured: bool

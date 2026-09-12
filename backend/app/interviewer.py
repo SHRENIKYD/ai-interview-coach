@@ -7,7 +7,7 @@ import json
 import logging
 import re
 
-from groq import APIConnectionError, APIStatusError, Groq, RateLimitError
+from openai import APIConnectionError, APIStatusError, OpenAI, RateLimitError
 
 from .config import get_settings
 from .models import Difficulty, Message, Role
@@ -45,6 +45,12 @@ Difficulty for this interview - {difficulty_brief}
 How you conduct the interview:
 - Ask exactly ONE question per turn. Never bundle several questions together.
 - Never teach, never explain, never hint, and never reveal the answer. You are assessing, not tutoring.
+- NEVER restate, confirm, expand on, or correct the technical content of an answer. Do not
+  repeat back what they got right, and do not say what the correct answer would have been.
+  "That's not quite right." is fine. "That's not right, because AVL trees actually..." is NOT -
+  it hands them the answer. A real interviewer keeps a straight face.
+- Never smuggle the answer into your next question. Do not embed the fact they missed, or a
+  leading phrase like "considering that X is true, ...". Ask the question cold.
 - If the candidate's answer is strong: acknowledge it briefly in one short phrase, then move to a DIFFERENT aspect of {topic}.
 - If the answer is partly right: ask ONE probing follow-up that pushes on the weak part, without revealing what is missing.
 - If the answer is wrong: note the gap in a single neutral line, then move on to another aspect. Do not correct it in detail.
@@ -93,15 +99,20 @@ class InterviewerError(RuntimeError):
         self.status_code = status_code
 
 
-def _client() -> Groq:
+def _client() -> OpenAI:
     settings = get_settings()
     if not settings.has_api_key:
         raise InterviewerError(
-            "The AI provider is not configured. Add GROQ_API_KEY to backend/.env and "
-            "restart the backend.",
+            f"{settings.provider.label} is not configured. Add "
+            f"{settings.provider.key_env} to backend/.env and restart the backend.",
             status_code=503,
         )
-    return Groq(api_key=settings.groq_api_key)
+    return OpenAI(
+        api_key=settings.api_key,
+        base_url=settings.provider.base_url,
+        timeout=90.0,
+        max_retries=2,
+    )
 
 
 def _complete(
@@ -109,7 +120,7 @@ def _complete(
 ) -> str:
     settings = get_settings()
     kwargs: dict = {
-        "model": settings.groq_model,
+        "model": settings.model,
         "messages": messages,
         "temperature": temperature,
         "max_tokens": 1024,
@@ -120,22 +131,23 @@ def _complete(
     try:
         completion = _client().chat.completions.create(**kwargs)
     except RateLimitError as exc:
-        logger.warning("Groq rate limit: %s", exc)
+        logger.warning("Rate limited by provider: %s", exc)
         raise InterviewerError(
             "The AI provider is rate limiting us right now. Wait a few seconds and try again.",
             status_code=429,
         ) from exc
     except APIConnectionError as exc:
-        logger.warning("Groq connection error: %s", exc)
+        logger.warning("Provider connection error: %s", exc)
         raise InterviewerError(
             "Could not reach the AI provider. Check your internet connection and try again.",
             status_code=502,
         ) from exc
     except APIStatusError as exc:
-        logger.warning("Groq returned %s: %s", exc.status_code, exc)
+        logger.warning("Provider returned %s: %s", exc.status_code, exc)
         if exc.status_code in (401, 403):
             raise InterviewerError(
-                "The AI provider rejected our API key. Check GROQ_API_KEY in backend/.env.",
+                f"{get_settings().provider.label} rejected our API key. Check "
+                f"{get_settings().provider.key_env} in backend/.env.",
                 status_code=502,
             ) from exc
         raise InterviewerError(
@@ -156,7 +168,7 @@ def _complete(
     return content
 
 
-def _to_groq_messages(messages: list[Message]) -> list[dict]:
+def _to_chat_messages(messages: list[Message]) -> list[dict]:
     return [
         {
             "role": "assistant" if m.role is Role.interviewer else "user",
@@ -197,7 +209,7 @@ def next_turn(
             }
         )
     else:
-        convo.extend(_to_groq_messages(messages))
+        convo.extend(_to_chat_messages(messages))
 
     if forced_end:
         convo.append(
