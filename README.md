@@ -60,6 +60,16 @@ Then open <http://localhost:3000>.
 
 On macOS or Linux the backend command is `.venv/bin/python -m uvicorn app.main:app --reload --port 8000`.
 
+## Deploying
+
+Backend on Render, frontend on Vercel — see **[DEPLOY.md](DEPLOY.md)** for the full
+walkthrough. [`render.yaml`](render.yaml) configures the backend service.
+
+The endpoints that call the model are rate limited per client IP (`RATE_LIMIT` requests
+per `RATE_LIMIT_WINDOW_SECONDS`, default 30 per 5 minutes), because a deployed instance
+spends real money on every turn. Read [Protecting your
+key](DEPLOY.md#protecting-your-key) before putting the URL anywhere public.
+
 ## How it works
 
 There is no database. The frontend holds the transcript and sends it back on every call,

@@ -16,6 +16,15 @@ load_dotenv(BACKEND_DIR / ".env")
 
 DEFAULT_ORIGINS = "http://localhost:3000,http://127.0.0.1:3000"
 DEFAULT_PROVIDER = "openrouter"
+DEFAULT_ORIGIN_REGEX = r"http://(localhost|127\.0\.0\.1)(:\d+)?"
+
+
+def _int_env(name: str, fallback: int) -> int:
+    try:
+        value = int(os.getenv(name, "").strip())
+    except (TypeError, ValueError):
+        return fallback
+    return value if value > 0 else fallback
 
 
 @dataclass(frozen=True)
@@ -63,6 +72,14 @@ class Settings:
             for origin in os.getenv("ALLOWED_ORIGINS", DEFAULT_ORIGINS).split(",")
             if origin.strip()
         ]
+        # Lets Vercel preview deployments through without listing each one.
+        self.allowed_origin_regex: str = os.getenv(
+            "ALLOWED_ORIGIN_REGEX", DEFAULT_ORIGIN_REGEX
+        ).strip()
+
+        # Rate limiting. Turns per window is what actually costs money.
+        self.rate_limit: int = _int_env("RATE_LIMIT", 30)
+        self.rate_limit_window: int = _int_env("RATE_LIMIT_WINDOW_SECONDS", 300)
 
     @property
     def has_api_key(self) -> bool:

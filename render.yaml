@@ -1,0 +1,29 @@
+# Render blueprint for the backend.
+# The frontend deploys to Vercel separately - see DEPLOY.md.
+services:
+  - type: web
+    name: ai-interview-coach-api
+    runtime: python
+    plan: free
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /api/health
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.12.7"
+      - key: AI_PROVIDER
+        value: openrouter
+      # Set this in the Render dashboard, not here - never commit a key.
+      - key: OPENROUTER_API_KEY
+        sync: false
+      # Your Vercel URL, e.g. https://ai-interview-coach.vercel.app
+      - key: ALLOWED_ORIGINS
+        sync: false
+      # Lets Vercel preview deployments call the API too.
+      - key: ALLOWED_ORIGIN_REGEX
+        value: ^https://.*\.vercel\.app$
+      - key: RATE_LIMIT
+        value: "30"
+      - key: RATE_LIMIT_WINDOW_SECONDS
+        value: "300"

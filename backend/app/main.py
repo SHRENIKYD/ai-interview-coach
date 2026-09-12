@@ -16,6 +16,7 @@ from starlette.exceptions import HTTPException as StarletteHTTPException
 
 from .config import get_settings
 from .interviewer import InterviewerError, build_report, count_questions, next_turn
+from .ratelimit import RateLimiter, client_key
 from .models import (
     AnswerRequest,
     HealthResponse,
@@ -69,11 +70,38 @@ app = FastAPI(
 app.add_middleware(
     CORSMiddleware,
     allow_origins=get_settings().allowed_origins,
-    allow_origin_regex=r"http://(localhost|127\.0\.0\.1)(:\d+)?",
+    allow_origin_regex=get_settings().allowed_origin_regex or None,
     allow_credentials=False,
     allow_methods=["GET", "POST", "OPTIONS"],
     allow_headers=["*"],
 )
+
+
+# --- Rate limiting ------------------------------------------------------------
+
+_limiter = RateLimiter(
+    limit=get_settings().rate_limit,
+    window_seconds=get_settings().rate_limit_window,
+)
+
+# Only the endpoints that actually call the paid model are metered.
+_METERED_PREFIX = "/api/interview/"
+
+
+@app.middleware("http")
+async def rate_limit(request: Request, call_next):
+    if request.method == "POST" and request.url.path.startswith(_METERED_PREFIX):
+        allowed, retry_after = _limiter.check(client_key(request))
+        if not allowed:
+            minutes = max(1, _limiter.window // 60)
+            response = _error(
+                429,
+                f"You've hit the limit of {_limiter.limit} requests per "
+                f"{minutes} minute(s). Try again in {retry_after} seconds.",
+            )
+            response.headers["Retry-After"] = str(retry_after)
+            return response
+    return await call_next(request)
 
 
 # --- Error handling: friendly JSON instead of stack traces -------------------
