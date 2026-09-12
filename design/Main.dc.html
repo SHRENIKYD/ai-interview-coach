@@ -1,0 +1,117 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;800;900&family=Geist+Mono:wght@400;500&display=swap">
+  <style>
+    body { margin: 0; }
+    a { color: #d93c11; } a:hover { color: #0a0a0a; }
+  </style>
+</helmet>
+
+<div style="width: 1440px; height: 900px; background: #eceae4; display: flex; flex-direction: column; box-sizing: border-box; font-family: 'Archivo', system-ui, sans-serif; color: #0a0a0a; overflow: hidden;">
+
+  <!-- TOP BAR -->
+  <div style="display: flex; align-items: center; justify-content: space-between; background: #0a0a0a; color: #eceae4; padding: 0 28px; min-height: 56px; flex-shrink: 0;">
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <span style="width: 13px; height: 13px; background: #d93c11;"></span>
+      <span style="font-family: 'Geist Mono', monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.14em;">INTERVIEW COACH</span>
+    </div>
+    <div style="display: flex; gap: 26px;">
+      <span style="font-family: 'Geist Mono', monospace; font-size: 11px; letter-spacing: 0.12em; color: #8a8880;">ONE QUESTION AT A TIME</span>
+      <span style="font-family: 'Geist Mono', monospace; font-size: 11px; letter-spacing: 0.12em; color: #8a8880;">NO HINTS</span>
+    </div>
+  </div>
+
+  <!-- BODY -->
+  <div style="flex: 1; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-bottom: 3px solid #0a0a0a; min-height: 0;">
+
+    <!-- LEFT: statement -->
+    <div style="display: flex; flex-direction: column; justify-content: space-between; padding: 56px 44px 40px 44px; border-right: 3px solid #0a0a0a;">
+      <div style="display: flex; flex-direction: column;">
+        <span style="font-family: 'Geist Mono', monospace; font-size: 11px; letter-spacing: 0.14em; color: #6b6a64; margin: 0 0 28px 0;">01 — SET UP</span>
+        <h1 style="font-size: 96px; font-weight: 900; line-height: 0.82; letter-spacing: -0.05em; text-transform: uppercase; margin: 0 0 26px 0;">
+          Prove<br>you<br><span style="background: #d93c11; color: #eceae4; padding: 0 10px;">know it</span>
+        </h1>
+        <p style="font-size: 17px; line-height: 1.5; max-width: 420px; margin: 0; text-wrap: pretty;">
+          An interviewer asks one question at a time, follows up when you're half-right, and moves on when you're wrong. It decides when you're done — then it grades you.
+        </p>
+      </div>
+
+      <div style="display: flex; gap: 0; border: 1px solid #0a0a0a;">
+        <div style="flex: 1; padding: 14px 16px; border-right: 1px solid #0a0a0a; display: flex; flex-direction: column; gap: 3px;">
+          <span style="font-family: 'Geist Mono', monospace; font-size: 10px; letter-spacing: 0.12em; color: #6b6a64;">TYPICAL</span>
+          <span style="font-size: 17px; font-weight: 800;">5–8 Q</span>
+        </div>
+        <div style="flex: 1; padding: 14px 16px; border-right: 1px solid #0a0a0a; display: flex; flex-direction: column; gap: 3px;">
+          <span style="font-family: 'Geist Mono', monospace; font-size: 10px; letter-spacing: 0.12em; color: #6b6a64;">PASS MARK</span>
+          <span style="font-size: 17px; font-weight: 800;">55</span>
+        </div>
+        <div style="flex: 1; padding: 14px 16px; display: flex; flex-direction: column; gap: 3px;">
+          <span style="font-family: 'Geist Mono', monospace; font-size: 10px; letter-spacing: 0.12em; color: #6b6a64;">ENDED BY</span>
+          <span style="font-size: 17px; font-weight: 800;">THEM</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: the form -->
+    <div style="display: flex; flex-direction: column;">
+
+      <div style="display: flex; flex-direction: column; padding: 40px 44px 28px 44px; border-bottom: 1px solid #0a0a0a;">
+        <span style="font-family: 'Geist Mono', monospace; font-size: 11px; letter-spacing: 0.14em; color: #6b6a64; margin: 0 0 16px 0;">TOPIC</span>
+        <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 3px solid #0a0a0a; padding: 0 0 12px 0;">
+          <span style="font-size: 44px; font-weight: 800; letter-spacing: -0.035em; text-transform: uppercase;">Binary Trees</span>
+          <span style="width: 14px; height: 30px; background: #d93c11;"></span>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 7px; margin: 18px 0 0 0;">
+          <span style="font-family: 'Geist Mono', monospace; font-size: 11px; letter-spacing: 0.06em; border: 1px solid #0a0a0a; padding: 8px 12px;">REACT HOOKS</span>
+          <span style="font-family: 'Geist Mono', monospace; font-size: 11px; letter-spacing: 0.06em; border: 1px solid #0a0a0a; padding: 8px 12px;">SQL INDEXING</span>
+          <span style="font-family: 'Geist Mono', monospace; font-size: 11px; letter-spacing: 0.06em; border: 1px solid #0a0a0a; padding: 8px 12px;">SYSTEM DESIGN</span>
+          <span style="font-family: 'Geist Mono', monospace; font-size: 11px; letter-spacing: 0.06em; border: 1px solid #0a0a0a; padding: 8px 12px;">PYTHON GENERATORS</span>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; padding: 28px 44px 0 44px;">
+        <span style="font-family: 'Geist Mono', monospace; font-size: 11px; letter-spacing: 0.14em; color: #6b6a64; margin: 0 0 16px 0;">DIFFICULTY</span>
+      </div>
+
+      <div style="display: flex; flex-direction: column; margin: 0 44px; border: 1px solid #0a0a0a;">
+        <div style="display: flex; align-items: center; gap: 18px; padding: 17px 20px; border-bottom: 1px solid #0a0a0a; min-height: 44px;">
+          <span style="font-family: 'Geist Mono', monospace; font-size: 11px; color: #6b6a64;">01</span>
+          <span style="font-size: 19px; font-weight: 600; width: 104px;">EASY</span>
+          <span style="font-size: 14px; color: #4a4943;">Definitions and recall</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 18px; padding: 17px 20px; border-bottom: 1px solid #0a0a0a; min-height: 44px;">
+          <span style="font-family: 'Geist Mono', monospace; font-size: 11px; color: #6b6a64;">02</span>
+          <span style="font-size: 19px; font-weight: 600; width: 104px;">MEDIUM</span>
+          <span style="font-size: 14px; color: #4a4943;">Applied problems</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 18px; padding: 17px 20px; background: #0a0a0a; color: #eceae4; min-height: 44px;">
+          <span style="font-family: 'Geist Mono', monospace; font-size: 11px; color: #8a8880;">03</span>
+          <span style="font-size: 19px; font-weight: 600; width: 104px;">HARD</span>
+          <span style="font-size: 14px; color: #b5b3ab;">Trade-offs and system thinking</span>
+          <span style="margin: 0 0 0 auto; width: 11px; height: 11px; background: #d93c11;"></span>
+        </div>
+      </div>
+
+      <div style="flex: 1;"></div>
+    </div>
+  </div>
+
+  <!-- START BAR -->
+  <button style="display: flex; align-items: center; justify-content: space-between; background: #d93c11; color: #eceae4; border: 0; padding: 0 34px; min-height: 92px; cursor: pointer; font-family: 'Archivo', sans-serif; flex-shrink: 0;">
+    <span style="font-size: 40px; font-weight: 900; letter-spacing: -0.03em; text-transform: uppercase;">Start interview</span>
+    <svg width="46" height="26" viewBox="0 0 46 26" fill="none" stroke="#eceae4" stroke-width="2.5">
+      <path d="M0 13h42M31 3l11 10-11 10"></path>
+    </svg>
+  </button>
+
+</div>
+</x-dc>
+</body>
+</html>

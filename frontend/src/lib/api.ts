@@ -86,6 +86,16 @@ async function post<T>(path: string, body: unknown): Promise<T> {
   return data as T;
 }
 
+/** Wake a sleeping free-tier instance while the user is still choosing a topic,
+ *  so the first real request doesn't pay the cold start. Failure is irrelevant. */
+export async function warmUp(): Promise<void> {
+  try {
+    await fetch(`${API_BASE}/api/health`, { cache: "no-store" });
+  } catch {
+    // The real request will surface any problem with a proper message.
+  }
+}
+
 export function startInterview(topic: string, difficulty: Difficulty) {
   return post<TurnResponse>("/api/interview/start", { topic, difficulty });
 }

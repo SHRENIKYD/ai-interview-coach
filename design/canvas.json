@@ -1,0 +1,56 @@
+{
+  "pages": [
+    { "id": "page-1", "name": "Scorecard — screens" },
+    { "id": "page-2", "name": "Explorations" }
+  ],
+  "artboards": [
+    { "file": "Main.dc.html", "title": "Start", "page": "page-1", "x": 0, "y": 0, "w": 1440, "h": 900 },
+    { "file": "Interview.dc.html", "title": "Interview", "page": "page-1", "x": 1560, "y": 0, "w": 1440, "h": 900 },
+    { "file": "Report.dc.html", "title": "Report", "page": "page-1", "x": 0, "y": 1180, "w": 1440, "h": 1040 },
+    { "file": "Mobile.dc.html", "title": "Interview — phone", "page": "page-1", "x": 1560, "y": 1180, "w": 390, "h": 844 },
+
+    { "file": "DirectionA.dc.html", "title": "A — Editorial Chamber", "page": "page-2", "x": 0, "y": 0, "w": 1240, "h": 880 },
+    { "file": "DirectionB.dc.html", "title": "B — Instrument", "page": "page-2", "x": 1400, "y": 0, "w": 1240, "h": 880 },
+    { "file": "DirectionC.dc.html", "title": "C — Low Adrenaline", "page": "page-2", "x": 2800, "y": 0, "w": 1240, "h": 880 },
+    { "file": "DirectionD.dc.html", "title": "D — Scorecard (original sketch)", "page": "page-2", "x": 4200, "y": 0, "w": 1240, "h": 880 }
+  ],
+  "annotations": [
+    {
+      "id": "system",
+      "x": 0,
+      "y": -230,
+      "w": 700,
+      "text": "SCORECARD — the system\n\nGround inverts to paper #ECEAE4 on black chrome. Archivo 900 for anything numeric or declarative; Geist Mono for every label, meta and tag. Zero radii throughout. Two rule weights only: 1px hairline inside a block, 3px between blocks. One accent — #D93C11 — reserved for the live thing (current question, your turn, the primary action). Green #146C3A appears once, on the result."
+    },
+    {
+      "id": "interview-note",
+      "x": 1560,
+      "y": -230,
+      "w": 700,
+      "text": "INTERVIEW — the screen I hadn't drawn\n\nNot chat bubbles: a transcript ledger. A fixed 148px gutter numbers every turn (Q01 / A01) so the interview reads as a record, and the composer sits in the same grid as the answers — you type where your answer will land. The current question carries the accent bar. Progress shows as segments, not a percentage, because the interviewer decides the length."
+    },
+    {
+      "id": "report-note",
+      "x": 0,
+      "y": 1010,
+      "w": 700,
+      "text": "REPORT — the payoff\n\nThe 176px numeral is the whole point of this direction. The band bar marks 55 (pass) in accent so the result is legible without reading a word. What landed / what didn't sit side by side at equal weight — the honesty is the product.\n\nSAVE SCORECARD is new and NOT built: flag if you want it, it would need the downloads path."
+    },
+    {
+      "id": "mobile-note",
+      "x": 1560,
+      "y": 1010,
+      "w": 620,
+      "text": "PHONE — 390px\n\nThe 148px gutter can't survive here, so the turn label moves above the text and the ledger keeps its rules. Headline sizes drop 96 → 40. Every control clears 44px. SEND becomes a full-width bar rather than a side button."
+    },
+    {
+      "id": "explorations-note",
+      "x": 0,
+      "y": -230,
+      "w": 640,
+      "page": "page-2",
+      "text": "The three directions you didn't pick, kept so you can still borrow from them — A's serif headline scale or B's report density would both graft onto Scorecard without much fight.\n\nD here is the original sketch; the built-out version is on the Scorecard page."
+    }
+  ],
+  "launch": { "view": "canvas", "page": "page-1" }
+}

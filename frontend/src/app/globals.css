@@ -1,76 +1,91 @@
 @import "tailwindcss";
 
-/* A single dark, professional theme. The app does not follow the OS light mode -
-   an interview room looks the same whatever time of day it is. */
+/* Scorecard — paper ground, black chrome, one accent reserved for whatever is live.
+   Zero radii anywhere. Exactly two rule weights: 1px inside a block, 3px between. */
 :root {
-  --background: #0b0d12;
-  --surface: #12151d;
-  --surface-raised: #191d28;
-  --border: #262b38;
-  --border-strong: #353b4c;
-  --foreground: #e8eaf0;
-  --muted: #9099ad;
-  --muted-strong: #b6bdcd;
-  --accent: #6c8cff;
-  --accent-hover: #7f9bff;
-  --accent-contrast: #0b0d12;
-  --success: #3fbf87;
-  --warning: #e0a33c;
-  --danger: #e5697a;
+  --paper: #eceae4;
+  --paper-sunk: #e2e0d9;
+  --ink: #0a0a0a;
+  --ink-soft: #22211d;
+  --muted: #6b6a64;
+  --muted-deep: #4a4943;
+  --rule: #c9c7c0;
+  --accent: #d93c11;
+  --accent-hover: #b9310c;
+  --success: #146c3a;
+  --success-soft: #9fd4b4;
+  --on-ink-muted: #8a8880;
+  --on-ink-rule: #2a2a27;
+  --on-ink-border: #45443f;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-surface: var(--surface);
-  --color-surface-raised: var(--surface-raised);
-  --color-border-subtle: var(--border);
-  --color-border-strong: var(--border-strong);
-  --color-foreground: var(--foreground);
+  --color-paper: var(--paper);
+  --color-paper-sunk: var(--paper-sunk);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
   --color-muted: var(--muted);
-  --color-muted-strong: var(--muted-strong);
+  --color-muted-deep: var(--muted-deep);
+  --color-rule: var(--rule);
   --color-accent: var(--accent);
   --color-accent-hover: var(--accent-hover);
-  --color-accent-contrast: var(--accent-contrast);
   --color-success: var(--success);
-  --color-warning: var(--warning);
-  --color-danger: var(--danger);
-  --font-sans: var(--font-geist-sans);
+  --color-success-soft: var(--success-soft);
+  --color-on-ink-muted: var(--on-ink-muted);
+  --color-on-ink-rule: var(--on-ink-rule);
+  --color-on-ink-border: var(--on-ink-border);
+  --font-sans: var(--font-archivo);
   --font-mono: var(--font-geist-mono);
 }
 
 html {
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-archivo), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
-/* Focus ring used consistently across every interactive element. */
+/* This direction has no rounded corners. Nothing should reintroduce them. */
+* {
+  border-radius: 0 !important;
+}
+
 @layer utilities {
+  /* Mono labels: the meta layer of the whole interface. */
+  .label {
+    font-family: var(--font-geist-mono), ui-monospace, monospace;
+    font-size: 0.6875rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  .label-sm {
+    font-family: var(--font-geist-mono), ui-monospace, monospace;
+    font-size: 0.625rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
   .focus-ring {
-    @apply outline-none focus-visible:ring-2 focus-visible:ring-accent/70 focus-visible:ring-offset-2 focus-visible:ring-offset-background;
+    @apply outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-paper;
   }
 }
 
-/* Scrollbars that match the theme rather than the OS default. */
 * {
   scrollbar-width: thin;
-  scrollbar-color: var(--border-strong) transparent;
+  scrollbar-color: var(--rule) transparent;
 }
 
 *::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+  width: 12px;
+  height: 12px;
 }
 
 *::-webkit-scrollbar-thumb {
-  background-color: var(--border-strong);
-  border-radius: 999px;
-  border: 3px solid transparent;
+  background-color: var(--rule);
+  border: 4px solid transparent;
   background-clip: content-box;
 }
 
@@ -88,7 +103,7 @@ body {
 @keyframes rise {
   from {
     opacity: 0;
-    transform: translateY(6px);
+    transform: translateY(5px);
   }
   to {
     opacity: 1;
@@ -97,5 +112,14 @@ body {
 }
 
 .animate-rise {
-  animation: rise 0.28s ease-out both;
+  animation: rise 0.24s ease-out both;
+}
+
+@keyframes blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+.animate-blink {
+  animation: blink 1s step-end infinite;
 }

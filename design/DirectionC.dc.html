@@ -1,0 +1,126 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,700&family=Geist:wght@300;400;500&display=swap">
+  <style>
+    body { margin: 0; }
+    a { color: #b9a3f5; } a:hover { color: #cdbcff; }
+  </style>
+</helmet>
+
+<div style="width: 1240px; height: 880px; background: #101018; padding: 44px; display: flex; gap: 40px; box-sizing: border-box; font-family: 'Geist', system-ui, sans-serif; color: #e9e7f2;">
+
+  <!-- ============ START SCREEN ============ -->
+  <div style="flex: 1; display: flex; flex-direction: column; background: #17171f; border: 1px solid #23222e; border-radius: 28px; padding: 40px 36px; box-sizing: border-box;">
+
+    <div style="display: flex; align-items: center; gap: 11px; margin: 0 0 40px 0;">
+      <span style="width: 34px; height: 34px; border-radius: 12px; background: #23203a; display: flex; align-items: center; justify-content: center;">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#b9a3f5" stroke-width="1.8" stroke-linecap="round">
+          <path d="M8 10h8M8 14h5"></path>
+          <path d="M4 5h16v12H9l-5 4V5z"></path>
+        </svg>
+      </span>
+      <span style="font-size: 14px; font-weight: 500; color: #8f8ba6;">Interview Coach</span>
+    </div>
+
+    <h1 style="font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-size: 40px; line-height: 1.1; font-weight: 500; margin: 0 0 16px 0; letter-spacing: -0.025em; text-wrap: pretty;">
+      What shall we<br>put you through?
+    </h1>
+    <p style="font-size: 15px; line-height: 1.65; color: #8f8ba6; margin: 0 0 38px 0; max-width: 380px; text-wrap: pretty;">
+      Pick a subject and a level. The interviewer takes it from there — and decides when you've shown enough.
+    </p>
+
+    <div style="display: flex; flex-direction: column; gap: 12px; margin: 0 0 26px 0;">
+      <div style="background: #1e1d28; border: 1px solid #2b2937; border-radius: 18px; padding: 18px 20px; display: flex; align-items: center; gap: 12px;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6d6987" stroke-width="1.8" stroke-linecap="round">
+          <circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path>
+        </svg>
+        <span style="font-size: 17px; color: #e9e7f2;">Binary Trees</span>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+        <span style="font-size: 13px; color: #8f8ba6; background: #1c1b25; border-radius: 999px; padding: 8px 14px;">React Hooks</span>
+        <span style="font-size: 13px; color: #8f8ba6; background: #1c1b25; border-radius: 999px; padding: 8px 14px;">SQL Indexing</span>
+        <span style="font-size: 13px; color: #8f8ba6; background: #1c1b25; border-radius: 999px; padding: 8px 14px;">System Design</span>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 10px; margin: 0 0 auto 0;">
+      <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px;">
+        <div style="background: #1c1b25; border: 1px solid #23222e; border-radius: 18px; padding: 16px 14px; display: flex; flex-direction: column; gap: 5px;">
+          <span style="font-size: 14px; font-weight: 500; color: #8f8ba6;">Easy</span>
+          <span style="font-size: 12px; color: #6d6987; line-height: 1.4;">Recall</span>
+        </div>
+        <div style="background: #1c1b25; border: 1px solid #23222e; border-radius: 18px; padding: 16px 14px; display: flex; flex-direction: column; gap: 5px;">
+          <span style="font-size: 14px; font-weight: 500; color: #8f8ba6;">Medium</span>
+          <span style="font-size: 12px; color: #6d6987; line-height: 1.4;">Applied</span>
+        </div>
+        <div style="background: #272247; border: 1px solid #4b3f86; border-radius: 18px; padding: 16px 14px; display: flex; flex-direction: column; gap: 5px;">
+          <span style="font-size: 14px; font-weight: 500; color: #e9e7f2;">Hard</span>
+          <span style="font-size: 12px; color: #b9a3f5; line-height: 1.4;">Trade-offs</span>
+        </div>
+      </div>
+    </div>
+
+    <button style="margin: 32px 0 0 0; min-height: 58px; background: #b9a3f5; color: #16121f; border: 0; border-radius: 18px; font-family: 'Geist', sans-serif; font-size: 16px; font-weight: 500; cursor: pointer;">
+      Start interview
+    </button>
+  </div>
+
+  <!-- ============ REPORT SCREEN ============ -->
+  <div style="flex: 1; display: flex; flex-direction: column; background: #17171f; border: 1px solid #23222e; border-radius: 28px; padding: 40px 36px; box-sizing: border-box;">
+
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 6px; margin: 0 0 26px 0;">
+      <h2 style="font-family: 'Bricolage Grotesque', system-ui, sans-serif; font-size: 26px; font-weight: 500; margin: 0; letter-spacing: -0.02em;">That's a wrap</h2>
+      <span style="font-size: 13px; color: #6d6987;">Binary Trees · Hard · 6 questions</span>
+    </div>
+
+    <div style="display: flex; align-items: center; gap: 26px; background: #1c1b25; border-radius: 22px; padding: 24px 26px; margin: 0 0 22px 0;">
+      <div style="position: relative; width: 104px; height: 104px; flex-shrink: 0;">
+        <svg width="104" height="104" viewBox="0 0 104 104" style="transform: rotate(-90deg);">
+          <circle cx="52" cy="52" r="45" fill="none" stroke="#272634" stroke-width="10"></circle>
+          <circle cx="52" cy="52" r="45" fill="none" stroke="#b9a3f5" stroke-width="10" stroke-linecap="round" stroke-dasharray="209 283"></circle>
+        </svg>
+        <div style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px;">
+          <span style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 32px; font-weight: 500; color: #e9e7f2;">74</span>
+          <span style="font-size: 10px; color: #6d6987;">of 100</span>
+        </div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 9px;">
+        <span style="align-self: flex-start; font-size: 13px; font-weight: 500; color: #7ee0ac; background: #17382a; border-radius: 999px; padding: 7px 16px;">Passed</span>
+        <span style="font-family: 'Bricolage Grotesque', sans-serif; font-size: 20px; font-weight: 500; color: #e9e7f2;">Good</span>
+        <span style="font-size: 13px; line-height: 1.5; color: #8f8ba6; max-width: 200px;">Solid fundamentals, thin on applied trade-offs.</span>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 10px; margin: 0 0 16px 0;">
+      <span style="font-size: 13px; font-weight: 500; color: #8f8ba6;">Went well</span>
+      <div style="background: #1c1b25; border-radius: 16px; padding: 15px 17px; font-size: 13px; line-height: 1.6; color: #c9c5da;">
+        Precise BST invariant — you named the whole-subtree condition, not just direct children.
+      </div>
+      <div style="background: #1c1b25; border-radius: 16px; padding: 15px 17px; font-size: 13px; line-height: 1.6; color: #c9c5da;">
+        Tied unbalanced insertion order to O(n) worst-case height.
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 10px; margin: 0 0 auto 0;">
+      <span style="font-size: 13px; font-weight: 500; color: #8f8ba6;">Worth another look</span>
+      <div style="background: #211c22; border-radius: 16px; padding: 15px 17px; font-size: 13px; line-height: 1.6; color: #c9c5da;">
+        AVL vs red-black stayed abstract — connect rebalancing cost to a write-heavy workload.
+      </div>
+    </div>
+
+    <button style="margin: 26px 0 0 0; min-height: 58px; background: #1e1d28; color: #e9e7f2; border: 1px solid #2b2937; border-radius: 18px; font-family: 'Geist', sans-serif; font-size: 16px; cursor: pointer;">
+      Go again
+    </button>
+  </div>
+
+</div>
+</x-dc>
+</body>
+</html>

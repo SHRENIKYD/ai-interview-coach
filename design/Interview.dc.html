@@ -1,0 +1,125 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;800;900&family=Geist+Mono:wght@400;500&display=swap">
+  <style>
+    body { margin: 0; }
+    a { color: #d93c11; } a:hover { color: #0a0a0a; }
+  </style>
+</helmet>
+
+<div style="width: 1440px; height: 900px; background: #eceae4; display: flex; flex-direction: column; box-sizing: border-box; font-family: 'Archivo', system-ui, sans-serif; color: #0a0a0a; overflow: hidden;">
+
+  <!-- HEADER -->
+  <div style="display: flex; align-items: stretch; background: #0a0a0a; color: #eceae4; min-height: 62px; flex-shrink: 0;">
+    <div style="display: flex; align-items: center; gap: 16px; padding: 0 26px; flex: 1;">
+      <span style="width: 13px; height: 13px; background: #d93c11;"></span>
+      <span style="font-size: 20px; font-weight: 800; letter-spacing: -0.02em; text-transform: uppercase;">Binary Trees</span>
+      <span style="font-family: 'Geist Mono', monospace; font-size: 10px; letter-spacing: 0.12em; border: 1px solid #45443f; padding: 5px 10px;">HARD</span>
+    </div>
+    <div style="display: flex; align-items: center; gap: 8px; padding: 0 22px; border-left: 1px solid #2a2a27;">
+      <span style="font-family: 'Geist Mono', monospace; font-size: 10px; letter-spacing: 0.12em; color: #8a8880;">PROGRESS</span>
+      <div style="display: flex; gap: 4px;">
+        <span style="width: 20px; height: 7px; background: #d93c11;"></span>
+        <span style="width: 20px; height: 7px; background: #d93c11;"></span>
+        <span style="width: 20px; height: 7px; background: #d93c11;"></span>
+        <span style="width: 20px; height: 7px; background: #45443f;"></span>
+        <span style="width: 20px; height: 7px; background: #45443f;"></span>
+        <span style="width: 20px; height: 7px; background: #45443f;"></span>
+      </div>
+    </div>
+    <button style="display: flex; align-items: center; padding: 0 24px; background: transparent; border: 0; border-left: 1px solid #2a2a27; color: #8a8880; font-family: 'Geist Mono', monospace; font-size: 11px; letter-spacing: 0.12em; cursor: pointer;">
+      END
+    </button>
+  </div>
+
+  <!-- TRANSCRIPT -->
+  <div style="flex: 1; display: flex; flex-direction: column; min-height: 0; border-bottom: 3px solid #0a0a0a;">
+
+    <!-- Q01 -->
+    <div style="display: flex; align-items: stretch; border-bottom: 1px solid #c9c7c0;">
+      <div style="width: 148px; flex-shrink: 0; border-right: 1px solid #c9c7c0; padding: 22px 20px; display: flex; flex-direction: column; gap: 5px;">
+        <span style="font-family: 'Geist Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.1em;">Q 01</span>
+        <span style="font-family: 'Geist Mono', monospace; font-size: 10px; letter-spacing: 0.1em; color: #6b6a64;">INTERVIEWER</span>
+      </div>
+      <div style="flex: 1; padding: 22px 28px; display: flex; align-items: center;">
+        <span style="font-size: 19px; font-weight: 500; line-height: 1.45; letter-spacing: -0.01em; text-wrap: pretty;">What makes a binary tree a binary search tree?</span>
+      </div>
+    </div>
+
+    <!-- A01 -->
+    <div style="display: flex; align-items: stretch; background: #e2e0d9; border-bottom: 1px solid #c9c7c0;">
+      <div style="width: 148px; flex-shrink: 0; border-right: 1px solid #c9c7c0; padding: 22px 20px; display: flex; flex-direction: column; gap: 5px;">
+        <span style="font-family: 'Geist Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.1em; color: #d93c11;">A 01</span>
+        <span style="font-family: 'Geist Mono', monospace; font-size: 10px; letter-spacing: 0.1em; color: #6b6a64;">YOU</span>
+      </div>
+      <div style="flex: 1; padding: 22px 28px;">
+        <span style="font-size: 16px; line-height: 1.6; color: #22211d; text-wrap: pretty;">Every key in a node's entire left subtree is less than the node, and every key in its right subtree is greater. The subtree-wide part matters — checking only direct children is the classic bug.</span>
+      </div>
+    </div>
+
+    <!-- Q02 -->
+    <div style="display: flex; align-items: stretch; border-bottom: 1px solid #c9c7c0;">
+      <div style="width: 148px; flex-shrink: 0; border-right: 1px solid #c9c7c0; padding: 22px 20px; display: flex; flex-direction: column; gap: 5px;">
+        <span style="font-family: 'Geist Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.1em;">Q 02</span>
+        <span style="font-family: 'Geist Mono', monospace; font-size: 10px; letter-spacing: 0.1em; color: #6b6a64;">INTERVIEWER</span>
+      </div>
+      <div style="flex: 1; padding: 22px 28px; display: flex; align-items: center;">
+        <span style="font-size: 19px; font-weight: 500; line-height: 1.45; letter-spacing: -0.01em; text-wrap: pretty;">Worst-case height of an unbalanced BST with n nodes — and why does that matter?</span>
+      </div>
+    </div>
+
+    <!-- A02 -->
+    <div style="display: flex; align-items: stretch; background: #e2e0d9; border-bottom: 1px solid #c9c7c0;">
+      <div style="width: 148px; flex-shrink: 0; border-right: 1px solid #c9c7c0; padding: 22px 20px; display: flex; flex-direction: column; gap: 5px;">
+        <span style="font-family: 'Geist Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.1em; color: #d93c11;">A 02</span>
+        <span style="font-family: 'Geist Mono', monospace; font-size: 10px; letter-spacing: 0.1em; color: #6b6a64;">YOU</span>
+      </div>
+      <div style="flex: 1; padding: 22px 28px;">
+        <span style="font-size: 16px; line-height: 1.6; color: #22211d;">O(n).</span>
+      </div>
+    </div>
+
+    <!-- Q03 — current, marked -->
+    <div style="display: flex; align-items: stretch; border-bottom: 1px solid #c9c7c0; border-left: 6px solid #d93c11;">
+      <div style="width: 142px; flex-shrink: 0; border-right: 1px solid #c9c7c0; padding: 22px 20px; display: flex; flex-direction: column; gap: 5px;">
+        <span style="font-family: 'Geist Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.1em;">Q 03</span>
+        <span style="font-family: 'Geist Mono', monospace; font-size: 10px; letter-spacing: 0.1em; color: #6b6a64;">INTERVIEWER</span>
+      </div>
+      <div style="flex: 1; padding: 22px 28px; display: flex; align-items: center;">
+        <span style="font-size: 19px; font-weight: 500; line-height: 1.45; letter-spacing: -0.01em; text-wrap: pretty;">That's not quite right. How would you decide between an AVL tree and a red-black tree for a write-heavy workload?</span>
+      </div>
+    </div>
+
+    <div style="flex: 1;"></div>
+  </div>
+
+  <!-- COMPOSER -->
+  <div style="display: flex; align-items: stretch; min-height: 148px; flex-shrink: 0;">
+    <div style="width: 148px; flex-shrink: 0; border-right: 1px solid #c9c7c0; padding: 20px; display: flex; flex-direction: column; gap: 5px;">
+      <span style="font-family: 'Geist Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.1em; color: #d93c11;">A 03</span>
+      <span style="font-family: 'Geist Mono', monospace; font-size: 10px; letter-spacing: 0.1em; color: #6b6a64;">YOU</span>
+    </div>
+    <div style="flex: 1; display: flex; flex-direction: column; padding: 20px 28px; gap: 10px;">
+      <span style="font-size: 16px; line-height: 1.6; color: #9a988f;">Type your answer…</span>
+      <div style="flex: 1;"></div>
+      <span style="font-family: 'Geist Mono', monospace; font-size: 10px; letter-spacing: 0.1em; color: #8a8880;">ENTER TO SEND &nbsp;·&nbsp; SHIFT + ENTER FOR A NEW LINE</span>
+    </div>
+    <button style="width: 168px; flex-shrink: 0; background: #0a0a0a; color: #eceae4; border: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 9px; cursor: pointer; font-family: 'Archivo', sans-serif;">
+      <svg width="34" height="20" viewBox="0 0 34 20" fill="none" stroke="#eceae4" stroke-width="2.5">
+        <path d="M0 10h30M21 2l9 8-9 8"></path>
+      </svg>
+      <span style="font-size: 15px; font-weight: 800; letter-spacing: 0.06em;">SEND</span>
+    </button>
+  </div>
+
+</div>
+</x-dc>
+</body>
+</html>

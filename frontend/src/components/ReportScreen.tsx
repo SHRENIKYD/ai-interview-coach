@@ -1,80 +1,98 @@
 "use client";
 
-import type { Band, Difficulty, Report } from "@/lib/api";
-import { ErrorNote, Pill, Screen, Spinner } from "./ui";
+import type { Difficulty, Report } from "@/lib/api";
+import { ArrowRight, ErrorNote, Spinner } from "./ui";
 
-const BAND_TONE: Record<Band, { text: string; ring: string; label: string }> = {
-  Excellent: { text: "text-success", ring: "stroke-success", label: "Excellent" },
-  Good: { text: "text-success", ring: "stroke-success", label: "Good" },
-  Adequate: { text: "text-warning", ring: "stroke-warning", label: "Adequate" },
-  Weak: { text: "text-danger", ring: "stroke-danger", label: "Weak" },
-};
+const BAND_MARKS = [
+  { at: 55, label: "55 Pass", accent: true },
+  { at: 70, label: "70", accent: false },
+  { at: 85, label: "85", accent: false },
+];
 
-function ScoreDial({ score, band }: { score: number; band: Band }) {
-  const tone = BAND_TONE[band];
-  const radius = 52;
-  const circumference = 2 * Math.PI * radius;
-  const filled = (Math.max(0, Math.min(100, score)) / 100) * circumference;
+function scorecardText(report: Report) {
+  const line = "=".repeat(58);
+  const list = (items: string[]) =>
+    items.length ? items.map((s, i) => `  ${i + 1}. ${s}`).join("\n") : "  —";
 
-  return (
-    <div className="relative h-32 w-32 shrink-0">
-      <svg viewBox="0 0 120 120" className="h-full w-full -rotate-90">
-        <circle
-          cx="60"
-          cy="60"
-          r={radius}
-          fill="none"
-          strokeWidth="9"
-          className="stroke-border-subtle"
-        />
-        <circle
-          cx="60"
-          cy="60"
-          r={radius}
-          fill="none"
-          strokeWidth="9"
-          strokeLinecap="round"
-          strokeDasharray={`${filled} ${circumference}`}
-          className={tone.ring}
-        />
-      </svg>
-      <div className="absolute inset-0 flex flex-col items-center justify-center">
-        <span className={`text-3xl font-semibold tabular-nums ${tone.text}`}>
-          {score}
-        </span>
-        <span className="text-muted text-[0.65rem] tracking-wider uppercase">
-          out of 100
-        </span>
-      </div>
-    </div>
-  );
+  return [
+    line,
+    "AI INTERVIEW COACH — SCORECARD",
+    line,
+    `Topic       ${report.topic}`,
+    `Difficulty  ${report.difficulty}`,
+    `Score       ${report.score} / 100`,
+    `Band        ${report.band}`,
+    `Result      ${report.result}`,
+    "",
+    "WHAT LANDED",
+    list(report.strengths),
+    "",
+    "WHAT DIDN'T",
+    list(report.weaknesses),
+    "",
+    "GO REVISE",
+    list(report.topics_to_revise),
+    "",
+    "VERDICT",
+    `  ${report.verdict}`,
+    "",
+    line,
+  ].join("\n");
 }
 
-function Section({
+function saveScorecard(report: Report) {
+  const slug = report.topic.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+  const blob = new Blob([scorecardText(report)], {
+    type: "text/plain;charset=utf-8",
+  });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = `scorecard-${slug}-${report.score}.txt`;
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  URL.revokeObjectURL(url);
+}
+
+function FindingList({
   title,
   items,
+  tone,
   emptyNote,
-  marker,
 }: {
   title: string;
   items: string[];
+  tone: "good" | "bad";
   emptyNote: string;
-  marker: string;
 }) {
   return (
-    <section className="border-border-subtle bg-surface rounded-2xl border p-5">
-      <h3 className="mb-3 text-sm font-semibold tracking-wide uppercase">{title}</h3>
+    <section className="flex flex-col">
+      <div className="border-ink flex items-center gap-2.5 border-b px-5 py-3.5 sm:px-7">
+        <span
+          className={`block h-1 w-4 ${tone === "good" ? "bg-success" : "bg-accent"}`}
+          aria-hidden="true"
+        />
+        <h3 className="label">{title}</h3>
+      </div>
       {items.length === 0 ? (
-        <p className="text-muted text-sm">{emptyNote}</p>
+        <p className="text-muted px-5 py-4 text-sm sm:px-7">{emptyNote}</p>
       ) : (
-        <ul className="space-y-2.5">
-          {items.map((item, index) => (
-            <li key={index} className="flex gap-3 text-sm leading-relaxed">
-              <span className="text-muted mt-0.5 shrink-0 select-none">{marker}</span>
-              <span>{item}</span>
-            </li>
-          ))}
-        </ul>
+        items.map((item, index) => (
+          <div
+            key={index}
+            className={`flex gap-4 px-5 py-4 sm:px-7 ${
+              index < items.length - 1 ? "border-rule border-b" : ""
+            }`}
+          >
+            <span className="label-sm text-muted pt-1">
+              {String(index + 1).padStart(2, "0")}
+            </span>
+            <p className="text-[0.9375rem] leading-relaxed text-pretty sm:text-base">
+              {item}
+            </p>
+          </div>
+        ))
       )}
     </section>
   );
@@ -99,120 +117,208 @@ export default function ReportScreen({
 }) {
   if (isLoading) {
     return (
-      <Screen>
-        <div className="flex flex-1 flex-col items-center justify-center gap-4 text-center">
-          <Spinner className="text-accent h-8 w-8" />
-          <div>
-            <p className="text-base font-medium">Scoring your interview…</p>
-            <p className="text-muted mt-1 text-sm">
-              Reading back through everything you said.
-            </p>
-          </div>
+      <div className="flex min-h-dvh flex-col items-center justify-center gap-5 px-6 text-center">
+        <Spinner className="text-accent h-9 w-9" />
+        <div className="flex flex-col gap-2">
+          <p className="text-2xl font-black tracking-[-0.03em] uppercase">
+            Marking your paper
+          </p>
+          <p className="label text-muted">
+            Reading back through everything you said
+          </p>
         </div>
-      </Screen>
+      </div>
     );
   }
 
   if (error || !report) {
     return (
-      <Screen>
-        <div className="flex flex-1 flex-col justify-center gap-5">
-          <div className="text-center">
-            <h1 className="text-xl font-semibold">Couldn&apos;t build your report</h1>
-            <p className="text-muted mt-1 text-sm">
-              Your interview finished, but the report didn&apos;t come through.
-            </p>
-          </div>
-          <ErrorNote
-            message={error ?? "The report was empty. Please try again."}
-            onRetry={onRetry}
-            retryLabel="Retry"
-          />
-          <button
-            type="button"
-            onClick={onRestart}
-            className="border-border-subtle text-muted hover:border-border-strong hover:text-foreground focus-ring mx-auto cursor-pointer rounded-xl border px-4 py-2 text-sm transition-colors"
-          >
-            Start a new interview
-          </button>
-        </div>
-      </Screen>
-    );
-  }
-
-  const tone = BAND_TONE[report.band];
-  const passed = report.result === "Pass";
-
-  return (
-    <Screen>
-      <div className="animate-rise flex flex-col gap-5 pb-10">
-        <header className="text-center">
-          <h1 className="text-2xl font-semibold tracking-tight sm:text-3xl">
-            Interview Complete
+      <div className="mx-auto flex min-h-dvh w-full max-w-2xl flex-col justify-center gap-6 px-5 sm:px-8">
+        <div className="flex flex-col gap-2">
+          <h1 className="text-3xl font-black tracking-[-0.03em] uppercase">
+            No scorecard
           </h1>
-          <div className="mt-3 flex flex-wrap items-center justify-center gap-2">
-            <Pill>{topic}</Pill>
-            <Pill>{difficulty}</Pill>
-          </div>
-        </header>
-
-        <section className="border-border-subtle bg-surface flex flex-col items-center gap-6 rounded-2xl border p-6 sm:flex-row sm:gap-8 sm:p-7">
-          <ScoreDial score={report.score} band={report.band} />
-          <div className="flex-1 text-center sm:text-left">
-            <span
-              className={`inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-sm font-semibold ${
-                passed
-                  ? "bg-success/15 text-success"
-                  : "bg-danger/15 text-danger"
-              }`}
-            >
-              {passed ? "Pass" : "Fail"}
-            </span>
-            <p className={`mt-3 text-lg font-medium ${tone.text}`}>{tone.label}</p>
-            <p className="text-muted mt-1 text-sm leading-relaxed">
-              {passed
-                ? "You cleared the bar for this interview."
-                : "You didn't clear the bar this time — the notes below say why."}
-            </p>
-          </div>
-        </section>
-
-        <Section
-          title="What you did well"
-          items={report.strengths}
-          emptyNote="Nothing stood out as a clear strength in this interview."
-          marker="+"
+          <p className="text-muted-deep text-sm">
+            The interview finished, but the report didn&apos;t come through.
+          </p>
+        </div>
+        <ErrorNote
+          message={error ?? "The report came back empty. Please try again."}
+          onRetry={onRetry}
+          retryLabel="Retry"
         />
-
-        <Section
-          title="Areas for improvement"
-          items={report.weaknesses}
-          emptyNote="No specific weaknesses were recorded."
-          marker="−"
-        />
-
-        <Section
-          title="Topics to revise"
-          items={report.topics_to_revise}
-          emptyNote="No revision topics were suggested."
-          marker="→"
-        />
-
-        <section className="border-border-subtle bg-surface rounded-2xl border p-5">
-          <h3 className="mb-3 text-sm font-semibold tracking-wide uppercase">
-            Interviewer&apos;s verdict
-          </h3>
-          <p className="text-muted-strong text-sm leading-relaxed">{report.verdict}</p>
-        </section>
-
         <button
           type="button"
           onClick={onRestart}
-          className="bg-accent text-accent-contrast hover:bg-accent-hover focus-ring w-full cursor-pointer rounded-xl px-4 py-3.5 text-base font-semibold transition-colors"
+          className="border-ink label hover:bg-ink hover:text-paper focus-ring cursor-pointer border px-5 py-3.5 transition-colors"
         >
-          Start New Interview
+          Start a new interview
         </button>
       </div>
-    </Screen>
+    );
+  }
+
+  const passed = report.result === "Pass";
+
+  return (
+    <div className="flex min-h-dvh flex-col">
+      {/* ---------- Chrome ---------- */}
+      <header className="bg-ink text-paper flex min-h-[56px] shrink-0 flex-wrap items-center justify-between gap-2 px-4 py-3 sm:px-6">
+        <div className="flex items-center gap-3.5">
+          <span className="bg-accent block h-3 w-3" aria-hidden="true" />
+          <span className="label">Scorecard</span>
+        </div>
+        <span className="label-sm text-on-ink-muted">
+          {topic} / {difficulty}
+        </span>
+      </header>
+
+      {/* ---------- Grade block ---------- */}
+      <div className="border-ink animate-rise flex flex-col border-b-[3px] lg:flex-row lg:items-stretch">
+        <div className="border-ink flex flex-col px-5 py-7 sm:px-8 lg:w-[470px] lg:shrink-0 lg:border-r-[3px] lg:px-9">
+          <span className="label text-muted mb-1.5">Score</span>
+          <div className="flex items-end gap-3.5">
+            <span className="text-[clamp(6rem,18vw,11rem)] leading-[0.76] font-black tracking-[-0.06em] tabular-nums">
+              {report.score}
+            </span>
+            <span className="label-sm text-muted pb-3.5">/100</span>
+          </div>
+        </div>
+
+        <div className="flex flex-1 flex-col">
+          <div className="border-ink flex flex-1 flex-col justify-center gap-3 border-t border-b px-5 py-6 sm:px-8 lg:border-t-0">
+            <div className="flex items-baseline justify-between gap-4">
+              <span className="label text-muted">Band</span>
+              <span className="text-[clamp(1.5rem,5vw,2.125rem)] leading-none font-black tracking-[-0.03em] uppercase">
+                {report.band}
+              </span>
+            </div>
+            <div
+              className="border-ink relative flex h-3.5 border"
+              role="img"
+              aria-label={`Score ${report.score} out of 100`}
+            >
+              <div
+                className="bg-ink"
+                style={{ width: `${Math.max(0, Math.min(100, report.score))}%` }}
+              />
+            </div>
+            <div className="relative h-4">
+              <span className="label-sm text-muted absolute left-0">0</span>
+              {BAND_MARKS.map((mark) => (
+                <span
+                  key={mark.at}
+                  className={`label-sm absolute -translate-x-1/2 ${mark.accent ? "text-accent" : "text-muted"}`}
+                  style={{ left: `${mark.at}%` }}
+                >
+                  {mark.label}
+                </span>
+              ))}
+              <span className="label-sm text-muted absolute right-0">100</span>
+            </div>
+          </div>
+
+          <div
+            className={`flex min-h-[74px] items-center justify-between px-5 py-5 sm:px-8 ${
+              passed ? "bg-success text-paper" : "bg-accent text-paper"
+            }`}
+          >
+            <span
+              className={`label ${passed ? "text-success-soft" : "text-paper/70"}`}
+            >
+              Result
+            </span>
+            <span className="text-[clamp(2rem,7vw,2.875rem)] leading-none font-black tracking-[-0.03em] uppercase">
+              {report.result}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      {/* ---------- Findings ---------- */}
+      <div className="border-ink grid border-b-[3px] lg:grid-cols-2">
+        <div className="border-ink border-b lg:border-r-[3px] lg:border-b-0">
+          <FindingList
+            title="What landed"
+            items={report.strengths}
+            tone="good"
+            emptyNote="Nothing stood out as a clear strength."
+          />
+        </div>
+        <FindingList
+          title="What didn't"
+          items={report.weaknesses}
+          tone="bad"
+          emptyNote="No specific weaknesses were recorded."
+        />
+      </div>
+
+      {/* ---------- Revise ---------- */}
+      {report.topics_to_revise.length > 0 && (
+        <div className="border-ink flex flex-col border-b-[3px] lg:flex-row lg:items-stretch">
+          <div className="border-ink flex items-center border-b px-5 py-3.5 sm:px-7 lg:w-[200px] lg:shrink-0 lg:border-r lg:border-b-0 lg:py-0">
+            <h3 className="label">Go revise</h3>
+          </div>
+          <div className="flex flex-1 flex-wrap">
+            {report.topics_to_revise.map((item, index) => (
+              <span
+                key={index}
+                className={`label-sm px-5 py-4 sm:px-6 ${
+                  index < report.topics_to_revise.length - 1
+                    ? "border-rule border-r border-b lg:border-b-0"
+                    : ""
+                }`}
+              >
+                {item}
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* ---------- Verdict ---------- */}
+      <div className="flex flex-1 flex-col lg:flex-row lg:items-stretch">
+        <div className="border-ink flex items-center border-b px-5 py-3.5 sm:px-7 lg:w-[200px] lg:shrink-0 lg:border-r lg:border-b-0 lg:py-6">
+          <h3 className="label">Verdict</h3>
+        </div>
+        <div className="flex-1 px-5 py-6 sm:px-8 lg:px-9">
+          <p className="max-w-4xl text-[clamp(1.0625rem,2.4vw,1.375rem)] leading-snug font-medium tracking-[-0.015em] text-pretty">
+            {report.verdict}
+          </p>
+        </div>
+      </div>
+
+      {/* ---------- Actions ---------- */}
+      <div className="border-ink flex shrink-0 flex-col border-t-[3px] sm:flex-row sm:items-stretch">
+        <button
+          type="button"
+          onClick={onRestart}
+          className="bg-ink text-paper focus-ring flex min-h-[80px] flex-1 cursor-pointer items-center justify-between gap-4 px-5 sm:px-8 lg:min-h-[92px] lg:px-9"
+        >
+          <span className="text-[clamp(1.625rem,4.5vw,2.25rem)] leading-none font-black tracking-[-0.03em] uppercase">
+            Go again
+          </span>
+          <ArrowRight className="h-6 w-11 shrink-0" />
+        </button>
+        <button
+          type="button"
+          onClick={() => saveScorecard(report)}
+          className="border-ink label hover:bg-paper-sunk focus-ring flex min-h-[62px] cursor-pointer items-center justify-center gap-3 border-t-[3px] px-6 transition-colors sm:w-[300px] sm:shrink-0 sm:border-t-0 sm:border-l-[3px]"
+        >
+          <svg
+            width="17"
+            height="17"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.8"
+            aria-hidden="true"
+          >
+            <path d="M12 3v13M7 11l5 5 5-5M4 20h16" />
+          </svg>
+          Save scorecard
+        </button>
+      </div>
+    </div>
   );
 }

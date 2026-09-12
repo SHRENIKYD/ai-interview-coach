@@ -1,0 +1,145 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;800;900&family=Geist+Mono:wght@400;500&display=swap">
+  <style>
+    body { margin: 0; }
+    a { color: #d93c11; } a:hover { color: #0a0a0a; }
+  </style>
+</helmet>
+
+<div style="width: 1440px; height: 1040px; background: #eceae4; display: flex; flex-direction: column; box-sizing: border-box; font-family: 'Archivo', system-ui, sans-serif; color: #0a0a0a; overflow: hidden;">
+
+  <!-- HEADER -->
+  <div style="display: flex; align-items: center; justify-content: space-between; background: #0a0a0a; color: #eceae4; padding: 0 26px; min-height: 62px; flex-shrink: 0;">
+    <div style="display: flex; align-items: center; gap: 14px;">
+      <span style="width: 13px; height: 13px; background: #d93c11;"></span>
+      <span style="font-family: 'Geist Mono', monospace; font-size: 12px; font-weight: 500; letter-spacing: 0.14em;">SCORECARD</span>
+    </div>
+    <div style="display: flex; gap: 24px;">
+      <span style="font-family: 'Geist Mono', monospace; font-size: 11px; letter-spacing: 0.12em; color: #8a8880;">BINARY TREES / HARD</span>
+      <span style="font-family: 'Geist Mono', monospace; font-size: 11px; letter-spacing: 0.12em; color: #8a8880;">6 QUESTIONS</span>
+    </div>
+  </div>
+
+  <!-- GRADE BLOCK -->
+  <div style="display: flex; align-items: stretch; border-bottom: 3px solid #0a0a0a; flex-shrink: 0;">
+
+    <div style="width: 470px; flex-shrink: 0; padding: 30px 34px 26px 34px; border-right: 3px solid #0a0a0a; display: flex; flex-direction: column;">
+      <span style="font-family: 'Geist Mono', monospace; font-size: 11px; letter-spacing: 0.14em; color: #6b6a64; margin: 0 0 6px 0;">SCORE</span>
+      <div style="display: flex; align-items: flex-end; gap: 14px;">
+        <span style="font-size: 176px; font-weight: 900; line-height: 0.76; letter-spacing: -0.06em;">74</span>
+        <span style="font-family: 'Geist Mono', monospace; font-size: 13px; color: #6b6a64; padding: 0 0 14px 0;">/100</span>
+      </div>
+    </div>
+
+    <div style="flex: 1; display: flex; flex-direction: column;">
+      <div style="flex: 1; padding: 24px 30px; border-bottom: 1px solid #0a0a0a; display: flex; flex-direction: column; gap: 12px; justify-content: center;">
+        <div style="display: flex; align-items: baseline; justify-content: space-between;">
+          <span style="font-family: 'Geist Mono', monospace; font-size: 11px; letter-spacing: 0.14em; color: #6b6a64;">BAND</span>
+          <span style="font-size: 34px; font-weight: 900; letter-spacing: -0.03em;">GOOD</span>
+        </div>
+        <div style="display: flex; height: 14px; border: 1px solid #0a0a0a;">
+          <div style="width: 74%; background: #0a0a0a;"></div>
+          <div style="flex: 1;"></div>
+        </div>
+        <div style="display: flex; justify-content: space-between;">
+          <span style="font-family: 'Geist Mono', monospace; font-size: 10px; color: #6b6a64;">0</span>
+          <span style="font-family: 'Geist Mono', monospace; font-size: 10px; color: #d93c11;">55 PASS</span>
+          <span style="font-family: 'Geist Mono', monospace; font-size: 10px; color: #6b6a64;">70</span>
+          <span style="font-family: 'Geist Mono', monospace; font-size: 10px; color: #6b6a64;">85</span>
+          <span style="font-family: 'Geist Mono', monospace; font-size: 10px; color: #6b6a64;">100</span>
+        </div>
+      </div>
+      <div style="display: flex; align-items: center; justify-content: space-between; padding: 22px 30px; background: #146c3a; color: #eceae4; min-height: 74px;">
+        <span style="font-family: 'Geist Mono', monospace; font-size: 11px; letter-spacing: 0.14em; color: #9fd4b4;">RESULT</span>
+        <span style="font-size: 46px; font-weight: 900; letter-spacing: -0.03em;">PASS</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- LANDED / DIDN'T -->
+  <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-bottom: 3px solid #0a0a0a; flex-shrink: 0;">
+
+    <div style="display: flex; flex-direction: column; border-right: 3px solid #0a0a0a;">
+      <div style="display: flex; align-items: center; gap: 10px; padding: 15px 30px; border-bottom: 1px solid #0a0a0a;">
+        <span style="width: 16px; height: 4px; background: #146c3a;"></span>
+        <span style="font-family: 'Geist Mono', monospace; font-size: 11px; letter-spacing: 0.14em;">WHAT LANDED</span>
+      </div>
+      <div style="display: flex; gap: 16px; padding: 18px 30px; border-bottom: 1px solid #c9c7c0;">
+        <span style="font-family: 'Geist Mono', monospace; font-size: 11px; color: #6b6a64; padding: 3px 0 0 0;">01</span>
+        <span style="font-size: 16px; line-height: 1.55; text-wrap: pretty;">Precise BST invariant — you named the whole-subtree condition, not just direct children.</span>
+      </div>
+      <div style="display: flex; gap: 16px; padding: 18px 30px;">
+        <span style="font-family: 'Geist Mono', monospace; font-size: 11px; color: #6b6a64; padding: 3px 0 0 0;">02</span>
+        <span style="font-size: 16px; line-height: 1.55; text-wrap: pretty;">Tied unbalanced insertion order to O(n) worst-case height.</span>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column;">
+      <div style="display: flex; align-items: center; gap: 10px; padding: 15px 30px; border-bottom: 1px solid #0a0a0a;">
+        <span style="width: 16px; height: 4px; background: #d93c11;"></span>
+        <span style="font-family: 'Geist Mono', monospace; font-size: 11px; letter-spacing: 0.14em;">WHAT DIDN'T</span>
+      </div>
+      <div style="display: flex; gap: 16px; padding: 18px 30px; border-bottom: 1px solid #c9c7c0;">
+        <span style="font-family: 'Geist Mono', monospace; font-size: 11px; color: #6b6a64; padding: 3px 0 0 0;">01</span>
+        <span style="font-size: 16px; line-height: 1.55; text-wrap: pretty;">AVL vs red-black stayed abstract — you didn't connect rebalancing cost to a write-heavy workload.</span>
+      </div>
+      <div style="display: flex; gap: 16px; padding: 18px 30px;">
+        <span style="font-family: 'Geist Mono', monospace; font-size: 11px; color: #6b6a64; padding: 3px 0 0 0;">02</span>
+        <span style="font-size: 16px; line-height: 1.55; text-wrap: pretty;">No mention of node fan-out or block size once the tree moves to disk.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- REVISE -->
+  <div style="display: flex; align-items: stretch; border-bottom: 3px solid #0a0a0a; flex-shrink: 0;">
+    <div style="display: flex; align-items: center; padding: 0 30px; border-right: 1px solid #0a0a0a; min-width: 200px;">
+      <span style="font-family: 'Geist Mono', monospace; font-size: 11px; letter-spacing: 0.14em;">GO REVISE</span>
+    </div>
+    <div style="flex: 1; display: flex; flex-wrap: wrap;">
+      <span style="font-family: 'Geist Mono', monospace; font-size: 12px; letter-spacing: 0.06em; padding: 19px 22px; border-right: 1px solid #c9c7c0;">AVL ROTATION COST</span>
+      <span style="font-family: 'Geist Mono', monospace; font-size: 12px; letter-spacing: 0.06em; padding: 19px 22px; border-right: 1px solid #c9c7c0;">RED-BLACK INVARIANTS</span>
+      <span style="font-family: 'Geist Mono', monospace; font-size: 12px; letter-spacing: 0.06em; padding: 19px 22px; border-right: 1px solid #c9c7c0;">B-TREE FAN-OUT</span>
+      <span style="font-family: 'Geist Mono', monospace; font-size: 12px; letter-spacing: 0.06em; padding: 19px 22px;">AMORTISED REBALANCING</span>
+    </div>
+  </div>
+
+  <!-- VERDICT -->
+  <div style="display: flex; align-items: stretch; flex: 1; min-height: 0;">
+    <div style="width: 200px; flex-shrink: 0; padding: 26px 30px; border-right: 1px solid #0a0a0a;">
+      <span style="font-family: 'Geist Mono', monospace; font-size: 11px; letter-spacing: 0.14em;">VERDICT</span>
+    </div>
+    <div style="flex: 1; padding: 26px 34px;">
+      <p style="font-size: 22px; font-weight: 500; line-height: 1.4; letter-spacing: -0.015em; margin: 0; max-width: 900px; text-wrap: pretty;">
+        Solid fundamentals — the invariants and complexity were sound, and you reasoned rather than recited. Where you thinned out was applying that to a concrete engineering constraint. Practise turning <em style="font-style: italic;">“I know what an AVL tree is”</em> into <em style="font-style: italic;">“here is why it wins for this workload”</em>.
+      </p>
+    </div>
+  </div>
+
+  <!-- AGAIN -->
+  <div style="display: flex; align-items: stretch; min-height: 92px; flex-shrink: 0; border-top: 3px solid #0a0a0a;">
+    <button style="flex: 1; display: flex; align-items: center; justify-content: space-between; background: #0a0a0a; color: #eceae4; border: 0; padding: 0 34px; cursor: pointer; font-family: 'Archivo', sans-serif;">
+      <span style="font-size: 36px; font-weight: 900; letter-spacing: -0.03em; text-transform: uppercase;">Go again</span>
+      <svg width="46" height="26" viewBox="0 0 46 26" fill="none" stroke="#eceae4" stroke-width="2.5">
+        <path d="M0 13h42M31 3l11 10-11 10"></path>
+      </svg>
+    </button>
+    <button style="width: 300px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; gap: 12px; background: #eceae4; color: #0a0a0a; border: 0; border-left: 3px solid #0a0a0a; cursor: pointer; font-family: 'Geist Mono', monospace; font-size: 12px; letter-spacing: 0.12em;">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0a0a0a" stroke-width="1.8">
+        <path d="M12 3v13M7 11l5 5 5-5M4 20h16"></path>
+      </svg>
+      SAVE SCORECARD
+    </button>
+  </div>
+
+</div>
+</x-dc>
+</body>
+</html>

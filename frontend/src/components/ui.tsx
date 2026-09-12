@@ -25,6 +25,22 @@ export function Spinner({ className = "h-4 w-4" }: { className?: string }) {
   );
 }
 
+export function ArrowRight({ className = "h-4 w-8" }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 46 26"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.5"
+      className={className}
+      aria-hidden="true"
+    >
+      <path d="M0 13h42M31 3l11 10-11 10" />
+    </svg>
+  );
+}
+
+/** The house error block: accent rule, mono label, plain sentence. */
 export function ErrorNote({
   message,
   onRetry,
@@ -35,36 +51,50 @@ export function ErrorNote({
   retryLabel?: string;
 }) {
   return (
-    <div
-      role="alert"
-      className="border-danger/40 bg-danger/10 flex flex-col gap-3 rounded-xl border px-4 py-3 sm:flex-row sm:items-center sm:justify-between"
-    >
-      <p className="text-danger text-sm leading-relaxed">{message}</p>
-      {onRetry && (
-        <button
-          type="button"
-          onClick={onRetry}
-          className="border-danger/50 text-danger hover:bg-danger/15 focus-ring shrink-0 cursor-pointer rounded-lg border px-3 py-1.5 text-sm font-medium transition-colors"
-        >
-          {retryLabel}
-        </button>
-      )}
+    <div role="alert" className="border-ink border">
+      <div className="bg-accent flex items-center gap-2.5 px-4 py-2">
+        <span className="bg-paper block h-1 w-4" />
+        <span className="label text-paper">Something went wrong</span>
+      </div>
+      <div className="flex flex-col gap-3 px-4 py-4 sm:flex-row sm:items-center sm:justify-between">
+        <p className="text-ink-soft text-sm leading-relaxed">{message}</p>
+        {onRetry && (
+          <button
+            type="button"
+            onClick={onRetry}
+            className="border-ink text-ink hover:bg-ink hover:text-paper focus-ring label shrink-0 cursor-pointer border px-4 py-2.5 transition-colors"
+          >
+            {retryLabel}
+          </button>
+        )}
+      </div>
     </div>
   );
 }
 
-export function Pill({ children }: { children: ReactNode }) {
+/** Black chrome bar that tops every screen. */
+export function TopBar({
+  children,
+  right,
+}: {
+  children: ReactNode;
+  right?: ReactNode;
+}) {
   return (
-    <span className="border-border-subtle bg-surface-raised text-muted-strong rounded-full border px-2.5 py-1 text-xs font-medium">
-      {children}
-    </span>
+    <header className="bg-ink text-paper flex min-h-[56px] shrink-0 items-stretch">
+      <div className="flex flex-1 items-center gap-3 px-4 sm:gap-4 sm:px-6">
+        <span className="bg-accent block h-3 w-3 shrink-0" aria-hidden="true" />
+        {children}
+      </div>
+      {right}
+    </header>
   );
 }
 
-export function Screen({ children }: { children: ReactNode }) {
+export function Chip({ children }: { children: ReactNode }) {
   return (
-    <main className="mx-auto flex min-h-dvh w-full max-w-3xl flex-col px-4 py-6 sm:px-6 sm:py-10">
+    <span className="border-on-ink-border label-sm border px-2.5 py-1.5">
       {children}
-    </main>
+    </span>
   );
 }

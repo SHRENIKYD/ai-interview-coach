@@ -1,0 +1,135 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Geist:wght@300;400;500;600&display=swap">
+  <style>
+    body { margin: 0; }
+    a { color: #3ed8d8; } a:hover { color: #7febeb; }
+  </style>
+</helmet>
+
+<div style="width: 1240px; height: 880px; background: #07090a; padding: 44px; display: flex; gap: 44px; box-sizing: border-box; font-family: 'Geist', system-ui, sans-serif; color: #d8e3e3;">
+
+  <!-- ============ START SCREEN ============ -->
+  <div style="flex: 1; display: flex; flex-direction: column; background: #0b0f11; border: 1px solid #172024; box-sizing: border-box;">
+
+    <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #172024; padding: 14px 20px;">
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #3ed8d8; letter-spacing: 0.06em;">coach://session/new</span>
+      <div style="display: flex; gap: 6px;">
+        <span style="width: 7px; height: 7px; border-radius: 50%; background: #1d2a2e;"></span>
+        <span style="width: 7px; height: 7px; border-radius: 50%; background: #1d2a2e;"></span>
+        <span style="width: 7px; height: 7px; border-radius: 50%; background: #3ed8d8;"></span>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; padding: 34px 32px; gap: 0; flex: 1;">
+
+      <h1 style="font-family: 'JetBrains Mono', monospace; font-size: 30px; font-weight: 700; line-height: 1.25; margin: 0 0 14px 0; letter-spacing: -0.02em;">
+        INTERVIEW<span style="color: #3ed8d8;">_</span>COACH
+      </h1>
+      <p style="font-family: 'JetBrains Mono', monospace; font-size: 12px; line-height: 1.7; color: #5d7075; margin: 0 0 38px 0;">
+        // one question per turn &nbsp;· &nbsp;no hints<br>
+        // interviewer terminates the session
+      </p>
+
+      <div style="display: flex; flex-direction: column; gap: 9px; margin: 0 0 26px 0;">
+        <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #4a5a5e; letter-spacing: 0.1em;">TOPIC</span>
+        <div style="display: flex; align-items: center; gap: 10px; background: #05080a; border: 1px solid #1d2a2e; padding: 15px 16px;">
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #3ed8d8;">&gt;</span>
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 14px; color: #d8e3e3;">binary_trees</span>
+          <span style="width: 8px; height: 16px; background: #3ed8d8; margin: 0 0 0 1px;"></span>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 9px; margin: 0 0 auto 0;">
+        <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #4a5a5e; letter-spacing: 0.1em;">DIFFICULTY</span>
+        <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px;">
+          <div style="border: 1px solid #1d2a2e; background: #05080a; padding: 13px 12px; display: flex; flex-direction: column; gap: 5px;">
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #5d7075;">EASY</span>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #3b494d;">recall</span>
+          </div>
+          <div style="border: 1px solid #1d2a2e; background: #05080a; padding: 13px 12px; display: flex; flex-direction: column; gap: 5px;">
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #5d7075;">MED</span>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #3b494d;">applied</span>
+          </div>
+          <div style="border: 1px solid #3ed8d8; background: #0c2123; padding: 13px 12px; display: flex; flex-direction: column; gap: 5px;">
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #3ed8d8;">HARD</span>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #2b9a9a;">trade-offs</span>
+          </div>
+        </div>
+      </div>
+
+      <button style="margin: 30px 0 0 0; min-height: 52px; background: #3ed8d8; color: #05080a; border: 0; font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 700; letter-spacing: 0.08em; cursor: pointer;">
+        RUN INTERVIEW
+      </button>
+    </div>
+  </div>
+
+  <!-- ============ REPORT SCREEN ============ -->
+  <div style="flex: 1; display: flex; flex-direction: column; background: #0b0f11; border: 1px solid #172024; box-sizing: border-box;">
+
+    <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #172024; padding: 14px 20px;">
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #3ed8d8; letter-spacing: 0.06em;">coach://report/4471</span>
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #4a5a5e;">6 TURNS</span>
+    </div>
+
+    <div style="display: flex; flex-direction: column; padding: 30px 32px; flex: 1;">
+
+      <div style="display: flex; align-items: stretch; border: 1px solid #1d2a2e; background: #05080a; margin: 0 0 24px 0;">
+        <div style="padding: 20px 24px; display: flex; flex-direction: column; gap: 4px; border-right: 1px solid #1d2a2e;">
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 52px; font-weight: 700; line-height: 1; color: #3ed8d8;">74</span>
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #4a5a5e; letter-spacing: 0.08em;">SCORE/100</span>
+        </div>
+        <div style="flex: 1; padding: 20px 22px; display: flex; flex-direction: column; justify-content: center; gap: 12px;">
+          <div style="display: flex; align-items: center; justify-content: space-between;">
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #5d7075;">BAND</span>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #d8e3e3;">GOOD</span>
+          </div>
+          <div style="height: 4px; background: #121a1d; display: flex;">
+            <div style="width: 74%; background: #3ed8d8;"></div>
+          </div>
+          <div style="display: flex; align-items: center; justify-content: space-between;">
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #5d7075;">RESULT</span>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 700; color: #4ade80;">PASS</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 11px; margin: 0 0 22px 0;">
+        <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #4a5a5e; letter-spacing: 0.1em;">+ STRENGTHS</span>
+        <div style="display: flex; gap: 10px; border-left: 2px solid #2b9a9a; padding: 0 0 0 12px;">
+          <span style="font-size: 13px; line-height: 1.6; color: #9fb2b5;">Precise BST invariant — whole-subtree, not just direct children.</span>
+        </div>
+        <div style="display: flex; gap: 10px; border-left: 2px solid #2b9a9a; padding: 0 0 0 12px;">
+          <span style="font-size: 13px; line-height: 1.6; color: #9fb2b5;">Tied unbalanced insertion order to O(n) worst-case height.</span>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 11px; margin: 0 0 auto 0;">
+        <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #4a5a5e; letter-spacing: 0.1em;">− GAPS</span>
+        <div style="display: flex; gap: 10px; border-left: 2px solid #8a5a3c; padding: 0 0 0 12px;">
+          <span style="font-size: 13px; line-height: 1.6; color: #9fb2b5;">AVL vs red-black stayed abstract; no link to write-heavy load.</span>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 0 0;">
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #3ed8d8; border: 1px solid #1d2a2e; padding: 5px 9px;">avl_rotations</span>
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #3ed8d8; border: 1px solid #1d2a2e; padding: 5px 9px;">rb_invariants</span>
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #3ed8d8; border: 1px solid #1d2a2e; padding: 5px 9px;">btree_fanout</span>
+        </div>
+      </div>
+
+      <button style="margin: 28px 0 0 0; min-height: 52px; background: transparent; color: #3ed8d8; border: 1px solid #1d2a2e; font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 0.08em; cursor: pointer;">
+        NEW SESSION
+      </button>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+</body>
+</html>
