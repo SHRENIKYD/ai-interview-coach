@@ -38,9 +38,8 @@ async def lifespan(app: FastAPI):
     settings = get_settings()
     logger.info("=" * 62)
     logger.info("  AI Interview Coach - backend ready")
-    logger.info("  API:    http://127.0.0.1:8000")
-    logger.info("  Docs:   http://127.0.0.1:8000/docs")
-    logger.info("  Health: http://127.0.0.1:8000/api/health")
+    logger.info("  Docs:   /docs        (on whichever host:port uvicorn reports below)")
+    logger.info("  Health: /api/health")
     logger.info("  Model:  %s", settings.groq_model)
     logger.info("  CORS:   %s", ", ".join(settings.allowed_origins))
     if settings.has_api_key:
